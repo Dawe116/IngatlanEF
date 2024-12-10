@@ -20,6 +20,7 @@ namespace IngatlanEF
         public  const string password = "afasztudja";
         public static bool isLogged = false;
         public static string LogName = "";
+        public static string[] tipusok = { "családi ház", "lakás", "építési terület", "raktárépület", "nyaraló", "lyuk" };
 
         public MainWindow()
         {

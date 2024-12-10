@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IngatlanEF.Models;
+using IngatlanEF.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +24,24 @@ namespace IngatlanEF.Windows
         public IngatlanokFelviWindow()
         {
             InitializeComponent();
+            cmbTipus.ItemsSource = MainWindow.tipusok;
+            cmbTipus.SelectedIndex = 0;
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
-
+            Ingatlan ujingatlan = new()
+            {
+                Id = 0,
+                Település = tbxTelepules.Text,
+                Cim = tbxcCím.Text,
+                Ár = int.Parse(tbxAr.Text),
+                Tipus = cmbTipus.Text,
+                KepNev = tbxKepNev.Text,
+                UgyintezoId = int.Parse(cmbUgyintezo.Text)
+            };
+            IngatlanService.Insert(ujingatlan);
+            MessageBox.Show("Sikeres rögzítés!");
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
