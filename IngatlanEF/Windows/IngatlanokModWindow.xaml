@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IngatlanEF.Windows"
         mc:Ignorable="d"
-        Title="IngatlanokModWindow" Height="450" Width="800">
+        Title="IngatlanokModWindow" Height="400" Width="400">
     <Grid>
-        
+        <StackPanel>
+            <ComboBox Name="cmbSelect" Margin="0 0 0 10" SelectionChanged="cmbSelect_SelectionChanged"/>
+
+            <Label Content="Település: "/>
+            <TextBox Name="tbxTelepules"/>
+
+            <Label Content="Cím: "/>
+            <TextBox Name="tbxcCím"/>
+
+            <Label Content="Ár: "/>
+            <TextBox Name="tbxAr"/>
+
+            <Label Content="Típus: "/>
+            <ComboBox Name="cmbTipus"/>
+
+            <Label Content="KepNev: "/>
+            <TextBox Name="tbxKepNev"/>
+
+            <Label Content="Ugyintezo: "/>
+            <ComboBox Name="cmbUgyintezo"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="btnAdd" Content="Hozzáadás" Click="Modify" Margin="5"/>
+                <Button Name="btnCancel" Content="Mégse" Click="Cancel" Margin="5"/>
+            </StackPanel>
+
+
+        </StackPanel>
     </Grid>
 </Window>
