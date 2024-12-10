@@ -36,18 +36,27 @@ namespace IngatlanEF.Windows
 
         private void Add(object sender, RoutedEventArgs e)
         {
+            int ujAr = 0;
+            int ujUgyi = 0;
+            if (int.TryParse(tbxAr.Text, out ujAr) && int.TryParse(cmbUgyintezo.Text.Split(':')[0], out ujUgyi)) { }
             Ingatlan ujingatlan = new()
             {
                 Id = 0,
                 Település = tbxTelepules.Text,
                 Cim = tbxcCím.Text,
-                Ár = int.Parse(tbxAr.Text),
+                Ár = ujAr,
                 Tipus = cmbTipus.Text,
                 KepNev = tbxKepNev.Text,
-                UgyintezoId = int.Parse(cmbUgyintezo.Text)
+                UgyintezoId = ujUgyi
             };
             IngatlanService.Insert(ujingatlan);
             MessageBox.Show("Sikeres rögzítés!");
+            tbxAr.Text = "";
+            tbxcCím.Text = "";
+            tbxKepNev.Text = "";
+            tbxTelepules.Text = "";
+            cmbTipus.SelectedItem = "ba";
+            cmbUgyintezo.Text = "";
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
