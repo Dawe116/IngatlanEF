@@ -49,7 +49,22 @@ namespace IngatlanEF.Windows
 
         private void Modify(object sender, RoutedEventArgs e)
         {
-
+            int ujAr = 0;
+            int ujUgyi = 0;
+            if (int.TryParse(tbxAr.Text, out ujAr) && int.TryParse(cmbUgyintezo.Text.Split(':')[0], out ujUgyi)) { }
+            Ingatlan ujingatlan = new()
+            {
+                Id = int.Parse(cmbSelect.SelectedItem.ToString().Split(':')[0]),
+                Település = tbxTelepules.Text,
+                Cim = tbxcCím.Text,
+                Ár = ujAr,
+                Tipus = cmbTipus.Text,
+                KepNev = tbxKepNev.Text,
+                UgyintezoId = ujUgyi
+            };
+            IngatlanService.Update(ujingatlan);
+            MessageBox.Show("Sikeres rögzítés!");
+            CmbSelectFeltolt();
         }
 
         private void Cancel(object sender, RoutedEventArgs e)

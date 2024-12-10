@@ -1,4 +1,7 @@
 ﻿using IngatlanEF.Windows;
+using Microsoft.Win32;
+using Mysqlx;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +20,7 @@ namespace IngatlanEF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public  const string password = "afasztudja";
+        public const string password = "afasztudja";
         public static bool isLogged = false;
         public static string LogName = "";
         public static string[] tipusok = { "családi ház", "lakás", "építési terület", "raktárépület", "nyaraló", "lyuk" };
@@ -29,7 +32,8 @@ namespace IngatlanEF
 
         private void Belepes(object sender, RoutedEventArgs e)
         {
-            if (isLogged) {
+            if (isLogged)
+            {
                 lblLoggedIn.Content = "Bejelentkezve ";
                 isLogged = false;
                 mnLogin.Header = "Belépés";
@@ -46,6 +50,7 @@ namespace IngatlanEF
                     mnUgyintezok.IsEnabled = true;
                     lblLoggedIn.Content = $"Bejelentkezve: {LogName}";
                     mnLogin.Header = "Kilépés";
+                    mnExport.IsEnabled = true;
                 }
             }
         }
@@ -67,7 +72,7 @@ namespace IngatlanEF
             UgyintezoFelviWindow ugyintezofelviwindow = new UgyintezoFelviWindow();
             ugyintezofelviwindow.ShowDialog();
         }
-        
+
         private void UgyintezoMod(object sender, RoutedEventArgs e)
         {
             UgyintezoModWindow ugyintezoModWindow = new UgyintezoModWindow();
@@ -96,6 +101,30 @@ namespace IngatlanEF
         {
             IngatlanokDelWindow ingatlanokDelWindow = new IngatlanokDelWindow();
             ingatlanokDelWindow.ShowDialog();
+        }
+
+        private void Export(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog()
+            {
+                FileName = "export.txt",
+                DefaultExt = ".txt",
+                Filter = "txt|*.txt"
+            };
+
+            if (save.ShowDialog() == true)
+            {
+                if (File.Exists(save.FileName))
+                {
+                    MessageBox.Show("A fájl már létezik, felülírja?","Figyelmeztetés",MessageBoxButton.YesNo,MessageBoxImage.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs kiválasztott állomány");
+            }
+
+
         }
     }
 }
