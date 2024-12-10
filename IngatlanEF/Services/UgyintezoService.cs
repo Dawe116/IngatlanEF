@@ -40,9 +40,9 @@ namespace IngatlanEF.Services
                     context.Ugyintezos.Add(ujUgyintezo);
                     context.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-
+                    throw;
                 }
 
             }

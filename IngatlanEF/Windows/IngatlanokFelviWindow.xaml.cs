@@ -21,11 +21,17 @@ namespace IngatlanEF.Windows
     /// </summary>
     public partial class IngatlanokFelviWindow : Window
     {
+        List<Ugyintezo> ugyintezos = UgyintezoService.GetallUgyintezo();
         public IngatlanokFelviWindow()
         {
             InitializeComponent();
             cmbTipus.ItemsSource = MainWindow.tipusok;
             cmbTipus.SelectedIndex = 0;
+
+            foreach (Ugyintezo item in ugyintezos) {
+                cmbUgyintezo.Items.Add($"{item.Id} : {item.Nev}");
+            }
+            cmbUgyintezo.SelectedIndex = 1;
         }
 
         private void Add(object sender, RoutedEventArgs e)
